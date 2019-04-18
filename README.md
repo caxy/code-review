@@ -1,6 +1,6 @@
 # Code Contributions and Review
 
-This is Dimagi's code review philosophy.
+This is Caxy's code review philosophy.
 
 ## Goals
 
@@ -20,7 +20,7 @@ At a very high level, the code review process should go as follows:
 
 - Author submits code to be reviewed and pings reviewer(s)
 - Reviewers review the code and leave feedback for the author
-- When the reviewers are satisfied with the changes, they merge the code
+- When the reviewers are satisfied with the changes, they apply the "Approved" label.
 
 In general, the onus is on the author to convince the reviewer that the changes are acceptable. However, the onus is on the reviewer to ensure that the changes requested are reasonable. 
 
@@ -41,18 +41,26 @@ Here are some guidelines for authors responding to feedback during code review.
 - Feedback that the author disagrees with should be discussed until an agreement is reached. 
 - Always be respectful when disagreeing, and speak objectively about the code and not about the person.
 - If an agreement can’t be reached it can be escalated to senior third party or the team
+- After one round of feedback, pair programing should be leveraged to implement changes for the review.
+
+### Scrutinizer (Tin Man)
+
+- scrutinizer-ci.com is a helpful service that will continually monitor Pull Requests and suggests changes to keep code quality, best practices, as well as finding simple bugs.
+- As the Author, when opening a Pull Request, Scrutinizer will automatically run, and it's your onus to fix or discuss false positives.
 
 ## As the reviewer
 
 The author likely put a lot of work into the code that they wrote. As such it is very important to always be respectful and collaborative in your suggestions and also be very respectful of the author’s time. Here are some tips for reviewers:
 
-- Use the checklist.
+- Use the checklist. (In Progress)
 - Always keep the focus on the code, not the author
 - Always be respectful. Don’t “talk down” to the author or or use any emotional language in discussing code.
 - Don’t assume that you have complete context of the change. When in doubt, ask questions before jumping to conclusions.
 - When making comments, it’s very helpful to say whether you expect the comment to be addressed before merge (a “blocker”) or not
 - For any “blockers” make sure that you communicate (respectfully) why they are blockers (see below).
+- All "comments" are to be considered as "blockers" unless otherwise stated.
 - If you don’t feel like you have enough context to understand and merge the change, don’t hesitate to ask for an additional reviewer who has more context.
+- Utilize scrutinizer and ensure suggestions it makes were completed by the author.
 
 ### Blockers
 
@@ -69,20 +77,9 @@ Some practical examples
 
 - Asking the author to write a few simple tests for a change is a reasonable blocker. 
 - Asking the author to write tests that would require bootstrapping an entire test framework should not be a blocker unless the code is absolutely mission-critical (and if it is mission-critical code it likely already has a test framework).
-- Asking the author to rename a poorly-named function is a reasonable blocker, though can typically be addressed in a follow up PR
-- Cleanup like converting a tuple to a namedtuple should likely not be a blocker
+- Asking the author to rename a poorly-named function is a reasonable blocker, though could be addressed in a follow up PR
+- Using Symfony 4 as an example, using "function indexAction" instead of "function index"a tuple to a namedtuple should likely not be a blocker in a controller would not be blocker.
 
-## Comment Conventions
-* :fish: (any kind of fish) : Pull request can be reviewed commit by commit.
-  * Often for larger changes it is easier to review the changes one commit at a time rather then the entire change set. This allows the reviewer to better follow the flow of the change and also spearate related changes from unrelated change.
-  
-  The etymology of this is as follows: commit by commit --> blow by blow --> :blowfish: / :blowfish: --> :blowfish: --> :fish: and now anything that lives in the sea is fair game for commit-wise.
 
-  Origins:
-    * https://github.com/dimagi/commcare-hq/pull/8938#issuecomment-153969885
-    * https://github.com/dimagi/commcare-hq/pull/11073#issuecomment-205374720
-
-* :office: : Pull request should be reviewed as a whole (not by commit).
-  * This usually indicates that the author of the changes wasn't able to keep the changes logically separated into commits and that reviewing commit by commit won't be helpful (or that the change is small enough to not matter).
-* :+1: on :white_check_mark: : Good to merge once the build has passed
-  * A comment by the reviewer indicating that they have reviewed the change and provided the build passes the change can be merged.
+### Follow-up PR's
+- Tickets should be made in the backlog and linked to the PR with the comment in question to ensure a followup will happen.
